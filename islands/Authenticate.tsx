@@ -1,30 +1,42 @@
-import { gun, user } from "./Gun.mts";
+import { gun, user } from "../utils/gun.ts";
 
 export default function Authenticate() {
   gun.value.on("auth", () => {
-    window.location.href = "/ledgers";
+    let redirect = sessionStorage.getItem("redirect");
+    sessionStorage.removeItem("redirect");
+
+    window.location.href = redirect || "/home";
   });
 
-  function handleSubmit(event: Event) {
+  function handleSubmit(event) {
     event.preventDefault();
 
-    const form = event.target as HTMLFormElement;
-
-    const alias = form.alias.value;
-    const password = form.password.value;
+    const alias = event.target.alias.value;
+    const password = event.target.password.value;
 
     user.value.auth(alias, password);
   }
 
   return (
-    <form class="flex flex-col" onSubmit={handleSubmit}>
-      <label for="alias">Alias</label>
-      <input type="text" id="alias" class="border" />
+    <form class="flex gap-5" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Alias"
+        id="alias"
+        class="border-4 rounded-full py-2 px-4"
+      />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" class="border" />
+      <input
+        type="password"
+        placeholder="Password"
+        id="password"
+        class="border-4 rounded-full py-2 px-4"
+      />
 
-      <button type="submit" class="bg-purple-500 text-white">
+      <button
+        type="submit"
+        class="border-4 border-yellow-600 text-yellow-600 font-bold rounded-full py-2 px-4"
+      >
         Authenticate
       </button>
     </form>

@@ -3,43 +3,45 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/appy.tsx";
+import * as $0 from "./routes/api/joke.ts";
+import * as $1 from "./routes/colors.tsx";
+import * as $2 from "./routes/home.tsx";
 import * as $3 from "./routes/index.tsx";
-import * as $4 from "./routes/ledgers/index.tsx";
-import * as $5 from "./routes/ledgers/new.tsx";
-import * as $6 from "./routes/login.tsx";
-import * as $7 from "./routes/schemas/index.tsx";
+import * as $4 from "./routes/login.tsx";
+import * as $5 from "./routes/register.tsx";
+import * as $6 from "./routes/settings.tsx";
+import * as $7 from "./routes/u/[pub].tsx";
 import * as $$0 from "./islands/Authenticate.tsx";
-import * as $$1 from "./islands/Counter.tsx";
-import * as $$2 from "./islands/Dropdown.tsx";
-import * as $$3 from "./islands/LedgerName.tsx";
-import * as $$4 from "./islands/Ledgers.tsx";
-import * as $$5 from "./islands/Logout.tsx";
-import * as $$6 from "./islands/Paste.tsx";
-import * as $$7 from "./islands/Schema.tsx";
+import * as $$1 from "./islands/Chat.tsx";
+import * as $$2 from "./islands/CreateUser.tsx";
+import * as $$3 from "./islands/Logout.tsx";
+import * as $$4 from "./islands/Nav.tsx";
+import * as $$5 from "./islands/Posts.tsx";
+import * as $$6 from "./islands/Profile.tsx";
+import * as $$7 from "./islands/ProfilePane.tsx";
+import * as $$8 from "./islands/Test.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
-    "./routes/appy.tsx": $2,
+    "./routes/api/joke.ts": $0,
+    "./routes/colors.tsx": $1,
+    "./routes/home.tsx": $2,
     "./routes/index.tsx": $3,
-    "./routes/ledgers/index.tsx": $4,
-    "./routes/ledgers/new.tsx": $5,
-    "./routes/login.tsx": $6,
-    "./routes/schemas/index.tsx": $7,
+    "./routes/login.tsx": $4,
+    "./routes/register.tsx": $5,
+    "./routes/settings.tsx": $6,
+    "./routes/u/[pub].tsx": $7,
   },
   islands: {
     "./islands/Authenticate.tsx": $$0,
-    "./islands/Counter.tsx": $$1,
-    "./islands/Dropdown.tsx": $$2,
-    "./islands/LedgerName.tsx": $$3,
-    "./islands/Ledgers.tsx": $$4,
-    "./islands/Logout.tsx": $$5,
-    "./islands/Paste.tsx": $$6,
-    "./islands/Schema.tsx": $$7,
+    "./islands/Chat.tsx": $$1,
+    "./islands/CreateUser.tsx": $$2,
+    "./islands/Logout.tsx": $$3,
+    "./islands/Nav.tsx": $$4,
+    "./islands/Posts.tsx": $$5,
+    "./islands/Profile.tsx": $$6,
+    "./islands/ProfilePane.tsx": $$7,
+    "./islands/Test.tsx": $$8,
   },
   baseUrl: import.meta.url,
   config,

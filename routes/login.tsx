@@ -5,14 +5,14 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>Login to Elderlake</title>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      <div class="w-screen h-screen bg-purple-50">
+      <div class="font-['Inter'] p-10">
         <Authenticate />
       </div>
     </>

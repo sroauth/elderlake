@@ -1,12 +1,12 @@
 import { Head } from "$fresh/runtime.ts";
-// import Counter from "../islands/Counter.tsx";
-// import GunPaste from "../islands/Paste.tsx";
+import Authenticate from "../islands/Authenticate.tsx";
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Elderlake</title>
+        <meta name="theme-color" content="#FFF2E6" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
           rel="stylesheet"
@@ -23,9 +23,11 @@ export default function Home() {
         </div>
 
         <div class="absolute top-5 right-5 z-10">
-          <button class="bg-white border-4 border-black text-xl font-bold py-2 px-4 rounded-full">
-            Go to app
-          </button>
+          <a href="/login">
+            <button class="bg-white border-4 border-black text-xl font-bold py-2 px-4 rounded-full">
+              Go to app
+            </button>
+          </a>
         </div>
 
         <div class="h-screen container mx-auto px-10 flex flex-col-reverse text-center gap-5 items-center justify-center snap-center lg:flex-row lg:text-left lg:gap-10">
@@ -47,7 +49,7 @@ export default function Home() {
 
           <div>
             <lottie-player
-              src="/Product Release_Animated/Product Release.json"
+              src="/illustrations/Product Release_Animated/Product Release.json"
               background="transparent"
               speed="1"
               class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
@@ -60,7 +62,7 @@ export default function Home() {
         <div class="h-screen container mx-auto px-10 flex flex-col gap-5 items-center justify-center text-center snap-center lg:flex-row lg:text-left lg:gap-10">
           <div>
             <lottie-player
-              src="/Integrations_Animated/Integrations.json"
+              src="/illustrations/Integrations_Animated/Integrations.json"
               id="secondLottie"
               background="transparent"
               speed="1"
@@ -110,7 +112,7 @@ export default function Home() {
 
           <div>
             <lottie-player
-              src="/Teamwork_Animated/Team Work.json"
+              src="/illustrations/Teamwork_Animated/Team Work.json"
               id="thirdLottie"
               background="transparent"
               speed="1"
@@ -124,7 +126,7 @@ export default function Home() {
         <div class="h-screen container mx-auto px-10 flex flex-col items-center justify-center gap-5 snap-center text-center lg:flex-row lg:text-left lg:gap-10">
           <div>
             <lottie-player
-              src="/Community_Animated/Community.json"
+              src="/illustrations/Community_Animated/Community.json"
               id="fourthLottie"
               background="transparent"
               speed="1"
@@ -165,7 +167,7 @@ export default function Home() {
 
           <div>
             <lottie-player
-              src="/Onboarding_Animated/Onboarding.json"
+              src="/illustrations/Onboarding_Animated/Onboarding.json"
               id="fifthLottie"
               background="transparent"
               speed="1"

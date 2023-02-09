@@ -63,3 +63,7 @@ body {
     transform: translate(0);
   }
 }
+
+.ratio {
+  width: calc(100vh / (16 / 9));
+}

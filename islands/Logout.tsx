@@ -1,4 +1,4 @@
-import { user } from "./Gun.mts";
+import { user } from "../utils/gun.ts";
 
 export default function Logout() {
   self.addEventListener("load", () => {
