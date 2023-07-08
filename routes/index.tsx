@@ -1,182 +1,88 @@
+import { Handlers } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
+import { getPosts, Post } from "../utils/posts.ts";
+import { PostCard } from "../components/PostCard.tsx";
 import { Head } from "$fresh/runtime.ts";
-import Authenticate from "../islands/Authenticate.tsx";
 
-export default function Home() {
+export const handler: Handlers<Post[]> = {
+  async GET(_req, ctx) {
+    const posts = await getPosts();
+    return ctx.render(posts);
+  },
+};
+
+export default function BlogIndexPage(props: PageProps<Post[]>) {
+  const posts = props.data;
+  const types = {
+    devblog: "yellow",
+    community: "purple",
+    "forging legends": "red",
+  };
+
   return (
     <>
       <Head>
-        <title>Elderlake</title>
-        <meta name="theme-color" content="#FFF2E6" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="stylesheet" href="/global.css" />
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
-        <script src="/lottie.js"></script>
+        <title>Weblog | Elderlake</title>
+
+        <link rel="stylesheet" href="/styles/main.css" />
       </Head>
+      <div class="lines">
+        <div class="hero" style={`background-image: url('/images/${posts[0].image}')`}>
+          <div class="flex flex-col">
+            <div class="flex justify-between items-center p-8">
+              <div class="bg-yellow-200 border border-yellow-500 p-2 h-12">
+                <img src="/logo.png" alt="" class="h-full" />
+              </div>
 
-      <div class="h-screen font-['Inter'] snap-mandatory snap-always snap-y overflow-y-scroll">
-        <div class="absolute top-5 left-5 z-10">
-          <img src="/logo.svg" alt="Elderlake Logo" class="w-12 h-12" />
-        </div>
-
-        <div class="absolute top-5 right-5 z-10">
-          <a href="/login">
-            <button class="bg-white border-4 border-black text-xl font-bold py-2 px-4 rounded-full">
-              Go to app
-            </button>
-          </a>
-        </div>
-
-        <div class="h-screen container mx-auto px-10 flex flex-col-reverse text-center gap-5 items-center justify-center snap-center lg:flex-row lg:text-left lg:gap-10">
-          <div>
-            <p class="text-xl mb-5 lg:text-2xl">
-              Unleash the true potential of social networking with{" "}
-              <span class="text-yellow-600 font-bold">Elderlake</span>! Seize
-              control of the digital realm to achieve your wildest dreams.
-            </p>
-
-            <div class="flex items-center gap-5 justify-center lg:justify-start">
-              <div class="scroll"></div>
-
-              <p class="text-xl text-[#D3C9BD] lg:text-2xl">
-                Scroll to learn more.
-              </p>
+              <div>
+                <ul class="text-uppercase text-2xl font-bold">
+                  <li class="border-b-4 border-yellow-200">Updates</li>
+                </ul>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <lottie-player
-              src="/illustrations/Product Release_Animated/Product Release.json"
-              background="transparent"
-              speed="1"
-              class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
-        </div>
+            <div class="flex-grow max-w-screen-lg mx-auto flex flex-col justify-center items-center">
+              <div class="flex justify-center gap-4 text(sm uppercase) font-bold mb-8">
+                <div class={`py-2 px-4 bg-${types[posts[0].type]}-200 text-${types[posts[0].type]}-600 border border-${types[posts[0].type]}-500`}>
+                  {posts[0].type}
+                </div>
 
-        <div class="h-screen container mx-auto px-10 flex flex-col gap-5 items-center justify-center text-center snap-center lg:flex-row lg:text-left lg:gap-10">
-          <div>
-            <lottie-player
-              src="/illustrations/Integrations_Animated/Integrations.json"
-              id="secondLottie"
-              background="transparent"
-              speed="1"
-              class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
+                <time class="bg-gray-200 text-gray-500 py-2 px-4 border border-gray-400">
+                  {new Date(posts[0].publishedAt).toLocaleDateString("en-us", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
 
-          <div>
-            <p class="text-xl mb-5 lg:text-2xl">
-              Built on GUN, the cutting-edge database technology, we are
-              rewriting the rules of social networking. With lightning-fast
-              speeds, rock-solid security, and complete control over your data,
-              you'll never look at social media the same way again.
-            </p>
+              <h1 class="text-5xl text-uppercase text-center">{posts[0].title}</h1>
 
-            <div class="flex items-center gap-5 justify-center lg:justify-start">
-              <div class="scroll"></div>
+              <p class="text-2xl my-8 text-center">{posts[0].snippet}</p>
 
-              <p class="text-xl text-[#D3C9BD] lg:text-2xl">
-                Scroll again to read our pitch.
-              </p>
+              <div class="flex justify-center gap-4">
+                <button class="bg-yellow-200 shadow-md text-yellow-600 text-uppercase font-bold py-2 px-4 border border-yellow-500 hover:scale-110 hover:shadow-lg transition-all duration-100 active:scale-105">
+                  <a href={`/${posts[0].slug}`}>Read more</a>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="h-screen container mx-auto px-10 flex flex-col-reverse items-center justify-center gap-5 snap-center text-center lg:flex-row lg:text-left lg:gap-10">
-          <div>
-            <p class="text-xl mb-5 lg:text-2xl">
-              <span class="text-yellow-600 font-bold">Elderlake</span> is more
-              than a social platform - it's a revolutionary movement that
-              challenges the status quo. Our decentralized architecture ensures
-              that your voice is heard, your privacy is protected, and your data
-              is always accessible. Say goodbye to censorship and hello to
-              freedom of expression.
-            </p>
-
-            <div class="flex items-center gap-5 justify-center lg:justify-start">
-              <div class="scroll"></div>
-
-              <p class="text-xl text-[#D3C9BD] lg:text-2xl">
-                That's not all. Keep scrolling.
-              </p>
-            </div>
+        <main class="max-w-screen-lg px-4 mx-auto pb-8">
+          <div class="py-12">
+            <ul class="flex gap-4">
+              <li class="bg-yellow-200 border border-yellow-500 font-bold text-yellow-600 py-2 px-4 text-uppercase">Recent</li>
+              <li class="bg-gray-100 border border-gray-200 font-bold text-gray-400 py-2 px-4 text-uppercase">Devblog</li>
+              <li class="bg-gray-100 border border-gray-200 font-bold text-gray-400 py-2 px-4 text-uppercase">Community</li>
+              <li class="bg-gray-100 border border-gray-200 font-bold text-gray-400 py-2 px-4 text-uppercase">Forging Legends</li>
+            </ul>
           </div>
 
-          <div>
-            <lottie-player
-              src="/illustrations/Teamwork_Animated/Team Work.json"
-              id="thirdLottie"
-              background="transparent"
-              speed="1"
-              class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-              loop
-              autoplay
-            ></lottie-player>
+          <div class="grid grid-cols-3 gap-8">
+            {posts.map((post, i) => i > 0 ? <PostCard post={post} /> : null)}
           </div>
-        </div>
-
-        <div class="h-screen container mx-auto px-10 flex flex-col items-center justify-center gap-5 snap-center text-center lg:flex-row lg:text-left lg:gap-10">
-          <div>
-            <lottie-player
-              src="/illustrations/Community_Animated/Community.json"
-              id="fourthLottie"
-              background="transparent"
-              speed="1"
-              class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
-
-          <div>
-            <p class="text-xl mb-5 lg:text-2xl">
-              Share your thoughts, experiences, and moments with the people who
-              matter most to you, and enjoy a new level of online socializing
-              that's safe, secure, and second to none.
-            </p>
-
-            <div class="flex items-center gap-5 justify-center lg:justify-start">
-              <div class="scroll"></div>
-
-              <p class="text-xl text-[#D3C9BD] lg:text-2xl">
-                One last thing. Scroll once more.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="h-screen container mx-auto px-10 flex flex-col-reverse items-center justify-center gap-10 snap-center text-center lg:flex-row lg:text-left lg:gap-10">
-          <div>
-            <p class="text-xl mb-5 lg:text-2xl">
-              Join the social media revolution and leave the past behind -
-              experience the adventure you've been eagerly waiting for!
-            </p>
-
-            <button class="border-4 border-yellow-600 text-2xl py-2 px-4 rounded-full font-bold text-yellow-600">
-              Join now
-            </button>
-          </div>
-
-          <div>
-            <lottie-player
-              src="/illustrations/Onboarding_Animated/Onboarding.json"
-              id="fifthLottie"
-              background="transparent"
-              speed="1"
-              class="w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
-        </div>
+        </main>
       </div>
     </>
   );

@@ -2,49 +2,16 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/api/joke.ts";
-import * as $1 from "./routes/colors.tsx";
-import * as $2 from "./routes/home.tsx";
-import * as $3 from "./routes/index.tsx";
-import * as $4 from "./routes/login.tsx";
-import * as $5 from "./routes/register.tsx";
-import * as $6 from "./routes/settings.tsx";
-import * as $7 from "./routes/u/[pub].tsx";
-import * as $$0 from "./islands/Authenticate.tsx";
-import * as $$1 from "./islands/Chat.tsx";
-import * as $$2 from "./islands/CreateUser.tsx";
-import * as $$3 from "./islands/Logout.tsx";
-import * as $$4 from "./islands/Nav.tsx";
-import * as $$5 from "./islands/Posts.tsx";
-import * as $$6 from "./islands/Profile.tsx";
-import * as $$7 from "./islands/ProfilePane.tsx";
-import * as $$8 from "./islands/Test.tsx";
+import * as $0 from "./routes/[slug].tsx";
+import * as $1 from "./routes/index.tsx";
 
 const manifest = {
   routes: {
-    "./routes/api/joke.ts": $0,
-    "./routes/colors.tsx": $1,
-    "./routes/home.tsx": $2,
-    "./routes/index.tsx": $3,
-    "./routes/login.tsx": $4,
-    "./routes/register.tsx": $5,
-    "./routes/settings.tsx": $6,
-    "./routes/u/[pub].tsx": $7,
+    "./routes/[slug].tsx": $0,
+    "./routes/index.tsx": $1,
   },
-  islands: {
-    "./islands/Authenticate.tsx": $$0,
-    "./islands/Chat.tsx": $$1,
-    "./islands/CreateUser.tsx": $$2,
-    "./islands/Logout.tsx": $$3,
-    "./islands/Nav.tsx": $$4,
-    "./islands/Posts.tsx": $$5,
-    "./islands/Profile.tsx": $$6,
-    "./islands/ProfilePane.tsx": $$7,
-    "./islands/Test.tsx": $$8,
-  },
+  islands: {},
   baseUrl: import.meta.url,
-  config,
 };
 
 export default manifest;
